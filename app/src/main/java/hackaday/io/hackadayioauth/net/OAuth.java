@@ -52,7 +52,7 @@ public class OAuth {
                               String authUrl, String scope, String encoding)
             throws UnsupportedEncodingException {
         mProvider = new CommonsHttpOAuthProvider(requestUrl + "?scope="
-                + URLEncoder.encode(scope, encoding) + "&response_type=code", accessUrl, authUrl + "?client_id= 3aih05g8fGJmCQpnVdXIb8rpN5iGFH9LdhJmK6G0dfeqQS0D&&response_type=code"); 
+                + URLEncoder.encode(scope, encoding) + "&response_type=code", accessUrl, authUrl + "?client_id= 3aih05g8fGJmCQpnVdXIb8rpN5iGFH9LdhJmK6G0dfeqQS0D&&response_type=code");
     }
 
     /**
