@@ -8,15 +8,23 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.format.Time;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
+import java.io.UnsupportedEncodingException;
+
 import hackaday.io.hackadayioauth.account.HackadayIOAccountService;
+import hackaday.io.hackadayioauth.net.OAuth;
 import hackaday.io.hackadayioauth.provider.FeedContract;
 import hackaday.io.hackadayioauth.util.SyncUtils;
+import oauth.signpost.exception.OAuthCommunicationException;
+import oauth.signpost.exception.OAuthExpectationFailedException;
+import oauth.signpost.exception.OAuthMessageSignerException;
+import oauth.signpost.exception.OAuthNotAuthorizedException;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -28,6 +36,7 @@ public class MainActivity extends ActionBarActivity {
     public static final String ACCOUNT_TYPE = "hackaday.io.hackadayioauth";
     // The account name
     public static final String ACCOUNT = "account";
+    private static final String TAG = "Main";
     // Instance fields
     Account mAccount;
     // Content provider scheme
@@ -122,6 +131,26 @@ public class MainActivity extends ActionBarActivity {
                 }
             }
         });
+
+        OAuth auth = new OAuth("fkXPcIluWCvA1YKY", "Z13hZo6tHeJFsBF9uWF9bwCukdLRIT5DqCwoJv580XymflLT", "http://localhost?code=");
+        try {
+            auth.setupProvider("https://auth.hackaday.io/access_token", "https://auth.hackaday.io/access_token", "https://hackaday.io/authorize", "test","utf-8");
+            String tok = auth.getRequestToken();
+            Log.i(TAG, tok);
+            auth.getAccessToken(tok);
+            auth.toString();
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (OAuthCommunicationException e) {
+            e.printStackTrace();
+        } catch (OAuthExpectationFailedException e) {
+            e.printStackTrace();
+        } catch (OAuthNotAuthorizedException e) {
+            e.printStackTrace();
+        } catch (OAuthMessageSignerException e) {
+            e.printStackTrace();
+        }
 
 
     }
